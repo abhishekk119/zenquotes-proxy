@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+// Use ESM import syntax (recommended for Node.js versions 14+)
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 exports.handler = async () => {
   try {
@@ -13,6 +14,9 @@ exports.handler = async () => {
       }
     };
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Failed to fetch quote" }) };
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ error: "Failed to fetch quote" }) 
+    };
   }
 };
